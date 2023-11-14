@@ -18,7 +18,7 @@ const setCurrentTime = () => {
 };
 
 player.on('timeupdate', e => {
-  throttle(getCurrentTime(e.seconds), 1);
+  throttle(getCurrentTime(e.seconds), 1000);
 });
 
 document.addEventListener('DOMContentLoaded', () => {

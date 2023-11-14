@@ -5,18 +5,22 @@ const iframe = document.querySelector('#vimeo-player');
 
 const player = new Player(iframe);
 
-const setCurrentTime = time => {
+const getCurrentTime = time => {
   localStorage.setItem('videoplayer-current-time', time);
 };
 
-player.on('timeupdate', e => {
-  throttle(setCurrentTime(e.seconds), 1);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
+const setCurrentTime = () => {
   const currentTime = localStorage.getItem('videoplayer-current-time');
 
   if (currentTime) {
     player.setCurrentTime(currentTime);
   }
+};
+
+player.on('timeupdate', e => {
+  throttle(getCurrentTime(e.seconds), 1);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  setCurrentTime();
 });

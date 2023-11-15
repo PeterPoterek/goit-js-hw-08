@@ -12,6 +12,9 @@ const handleSubmit = e => {
   const result = { email: email, message: message };
   console.log(result);
 
+  localStorage.removeItem('email');
+  localStorage.removeItem('message');
+
   e.target.elements.email.value = '';
   e.target.elements.message.value = '';
 };
@@ -28,11 +31,13 @@ const setMessageValue = e => {
 emailInput.addEventListener('change', setEmailValue);
 messageTextArea.addEventListener('change', setMessageValue);
 
-const handlePageReload = () => {
+const setFormValues = () => {
   feedbackForm.elements.email.value = localStorage.getItem('email');
   feedbackForm.elements.message.value = localStorage.getItem('message');
+};
 
-  throttle();
+const handlePageReload = () => {
+  throttle(setFormValues(), 500);
 };
 
 document.addEventListener('DOMContentLoaded', handlePageReload);

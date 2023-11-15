@@ -7,9 +7,6 @@ const messageTextArea = feedbackForm.querySelector('textarea[name="message"]');
 const handleSubmit = e => {
   e.preventDefault();
 
-  console.log(localStorage.getItem('email'));
-  console.log(localStorage.getItem('message'));
-
   const email = e.target.elements.email.value;
   const message = e.target.elements.message.value;
 
@@ -32,8 +29,8 @@ const setMessageValue = e => {
   localStorage.setItem('message', e.target.value);
 };
 
-emailInput.addEventListener('change', setEmailValue);
-messageTextArea.addEventListener('change', setMessageValue);
+emailInput.addEventListener('input', setEmailValue);
+messageTextArea.addEventListener('input', setMessageValue);
 
 const setFormValues = () => {
   feedbackForm.elements.email.value = localStorage.getItem('email');

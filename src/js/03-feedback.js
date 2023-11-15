@@ -6,6 +6,10 @@ const messageTextArea = feedbackForm.querySelector('textarea[name="message"]');
 
 const handleSubmit = e => {
   e.preventDefault();
+
+  console.log(localStorage.getItem('email'));
+  console.log(localStorage.getItem('message'));
+
   const email = e.target.elements.email.value;
   const message = e.target.elements.message.value;
 
@@ -36,8 +40,6 @@ const setFormValues = () => {
   feedbackForm.elements.message.value = localStorage.getItem('message');
 };
 
-const handlePageReload = () => {
-  throttle(setFormValues(), 500);
-};
+const throttledSetFormValues = throttle(setFormValues, 500);
 
-document.addEventListener('DOMContentLoaded', handlePageReload);
+document.addEventListener('DOMContentLoaded', throttledSetFormValues);

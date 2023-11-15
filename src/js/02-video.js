@@ -17,10 +17,12 @@ const setCurrentTime = () => {
   }
 };
 
+const handlePageReload = () => {
+  setCurrentTime();
+};
+
 player.on('timeupdate', e => {
   throttle(getCurrentTime(e.seconds), 1000);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  setCurrentTime();
-});
+document.addEventListener('DOMContentLoaded', handlePageReload);

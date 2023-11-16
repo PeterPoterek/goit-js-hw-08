@@ -13,9 +13,6 @@ const handleSubmit = e => {
   const result = { email: email, message: message };
   console.log(result);
 
-  localStorage.removeItem('email');
-  localStorage.removeItem('message');
-
   e.target.elements.email.value = '';
   e.target.elements.message.value = '';
 };

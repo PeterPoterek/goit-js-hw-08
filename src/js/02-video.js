@@ -23,7 +23,7 @@ const handlePageReload = () => {
 player.on(
   'timeupdate',
   throttle(e => {
-    getCurrentTime(e.seconds);
+    getCurrentTime(Math.floor(e.seconds));
   }, 1000)
 );
 

@@ -22,12 +22,17 @@ const handleSubmit = e => {
 
 feedbackForm.addEventListener('submit', handleSubmit);
 
-const setEmailValue = e => {
-  localStorage.setItem('email', e.target.value);
+const setLocalStorageValues = (e, name) => {
+  localStorage.setItem(name, e.target.value);
 };
-const setMessageValue = e => {
-  localStorage.setItem('message', e.target.value);
-};
+
+const setEmailValue = throttle(e => {
+  setLocalStorageValues(e, 'email');
+}, 500);
+
+const setMessageValue = throttle(e => {
+  setLocalStorageValues(e, 'message');
+}, 500);
 
 emailInput.addEventListener('input', setEmailValue);
 messageTextArea.addEventListener('input', setMessageValue);
@@ -37,6 +42,4 @@ const setFormValues = () => {
   feedbackForm.elements.message.value = localStorage.getItem('message');
 };
 
-const throttledSetFormValues = throttle(setFormValues, 500);
-
-document.addEventListener('DOMContentLoaded', throttledSetFormValues);
+document.addEventListener('DOMContentLoaded', setFormValues);
